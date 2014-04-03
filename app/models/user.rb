@@ -20,6 +20,14 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  belongs_to :city
+  belongs_to :state
+  belongs_to :country
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  GENDER_TYPE = %w(male female)
+  validates :gender, inclusion: { in: GENDER_TYPE }
 end
