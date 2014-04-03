@@ -19,6 +19,7 @@ gem 'bcrypt'
 gem "font-awesome-rails"
 gem 'masonry-rails'
 gem "paperclip-dropbox"
+
 gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 group :doc do
   gem 'sdoc', require: false
@@ -29,6 +30,7 @@ gem 'pg'
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'factory_girl_rails', '~> 4.2.1'
+  gem 'hirb'
 end
 
 group :test do
