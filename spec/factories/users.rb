@@ -21,5 +21,12 @@
 
 FactoryGirl.define do
   factory :user do
+    name "Michal"
+    sequence(:email)  { |n| "michal#{n}@example.com" }
+    password "test1234"
+    gender "male"
+    city City.where(name: "Mielec").first_or_create
+    state State.where(name: "Podkarpackie").first_or_create
+    country Country.where(name: "Poland").first_or_create
   end
 end
