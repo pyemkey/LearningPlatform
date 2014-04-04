@@ -14,7 +14,7 @@ gem 'figaro'
 gem 'bootstrap-sass'
 gem 'high_voltage', '~> 2.1.0'
 gem "better_errors", "~> 1.1.0"
-gem 'simple_form'
+gem 'formtastic-bootstrap'
 gem 'bcrypt'
 gem "font-awesome-rails"
 gem 'masonry-rails'
