@@ -36,7 +36,9 @@
 #
 
 LearningPlatform::Application.routes.draw do
+  root "dashboard#home"
   devise_for :users
+  resources :users
   resources :courses do
     resources :lessons
   end
