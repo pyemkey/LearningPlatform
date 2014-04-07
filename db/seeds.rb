@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'open-uri'
+require 'faker'
 
 open("http://openconcept.ca/sites/openconcept.ca/files/country_code_drupal_0.txt") do |countries|
 
@@ -13,4 +14,11 @@ open("http://openconcept.ca/sites/openconcept.ca/files/country_code_drupal_0.txt
       code, name = country.chomp.split('|')
       Country.create!(name: name, code: code)
     end
+end
+
+admin = User.create(email: "michal#example.com", password: "test1234", name: Faker::Name.name)
+
+10.times do 
+  user = User.create(email: Faker::Internet.email, password: "test1234", name: Faker::Internet.user_name)
+  
 end
