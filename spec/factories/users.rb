@@ -15,18 +15,23 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  gender                 :string(255)
+#  city_id                :integer
+#  state_id               :integer
+#  country_id             :integer
+#  name                   :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
   factory :user do
+    association :city
+    association :state
+    association :country
     name "Michal"
-    sequence(:email)  { |n| "michal#{n}@example.com" }
+    email { Faker::Internet.email}
     password "test1234"
     gender "male"
-    city City.where(name: "Mielec").first_or_create
-    state State.where(name: "Podkarpackie").first_or_create
-    country Country.where(name: "Poland").first_or_create
   end
 end
