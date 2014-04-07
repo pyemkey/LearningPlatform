@@ -1,4 +1,19 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import 'bootstrap';
+header {
+  background-image: url('header.jpg');
+  background-position: center center;
+  height: 700px;
+}
+
+.title-wrapper {
+  text-align: center;
+}
+
+.title {
+  color: white;
+  font-size: 64px;
+  
+  text-transform: uppercase;
+}
