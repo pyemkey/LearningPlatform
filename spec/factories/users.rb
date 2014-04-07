@@ -25,11 +25,11 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:author] do
     association :city
     association :state
     association :country
-    name "Michal"
+    name { Faker::Internet.user_name }
     email { Faker::Internet.email}
     password "test1234"
     gender "male"
