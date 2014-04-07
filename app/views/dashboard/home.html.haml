@@ -1,2 +1,7 @@
-%h1 Dashboard#home
-%p Find me in app/views/dashboard/home.html.haml
+=content_for :head do
+  - unless current_user
+    %header
+      .container
+        .title-wrapper
+          %h1.title Be creative like a child
+          = link_to "ENTER", new_user_registration_path, class: "btn btn-success btn-lg call-to-action"
