@@ -8,7 +8,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  author_id    :integer
-#  editor_id_id :integer
+#  editor_id :integer
 #
 
 require 'faker'
@@ -16,7 +16,8 @@ require 'faker'
 
 FactoryGirl.define do
   factory :course do
-    title Faker::Lorem.characters(5)
-    description Faker::Lorem.sentence
+    association :author
+    title {Faker::Lorem.characters(5)}
+    description {Faker::Lorem.sentence}
   end
 end
