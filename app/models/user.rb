@@ -15,12 +15,22 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  gender                 :string(255)
+#  city_id                :integer
+#  state_id               :integer
+#  country_id             :integer
+#  name                   :string(255)
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   GENDER_TYPE = %w(male female)
+
+
+  has_many :course_learners, foreign_key: "learner_id"
+  has_many :authored_courses, foreign_key: "author_id", class_name: "Course"
+  has_many :courses, through: :course_learners
 
   belongs_to :city, autosave: true
   belongs_to :state, autosave: true
