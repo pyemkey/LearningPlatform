@@ -8,7 +8,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  author_id    :integer
-#  editor_id_id :integer
+#  editor_id    :integer
 #
 
 class Course < ActiveRecord::Base
@@ -16,4 +16,8 @@ class Course < ActiveRecord::Base
   belongs_to :author, class_name: "User"
   has_many :course_learners
   has_many :learners, through: :course_learners
+
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :author_id, presence: true
 end
