@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   has_many :authored_courses, foreign_key: "author_id", class_name: "Course"
   has_many :courses, through: :course_learners
 
-  belongs_to :city, autosave: true
-  belongs_to :state, autosave: true
+  belongs_to :city
+  belongs_to :state
   belongs_to :country
   accepts_nested_attributes_for :city
   accepts_nested_attributes_for :state
@@ -42,10 +42,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :city, presence: true, on: :update
-  validates :state, presence: true, on: :update
-  validates :country, presence: true, on: :update
-  validates :gender, inclusion: { in: GENDER_TYPE }, presence: true, on: :update
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :country, presence: true
+  validates :gender, inclusion: { in: GENDER_TYPE }, presence: true
 
   def autosave_associated_records_for_city
     begin
