@@ -16,7 +16,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :course do
-    association :author
+    association :author, factory: :user, strategy: :build
     title {Faker::Lorem.characters(5)}
     description {Faker::Lorem.sentence}
   end
