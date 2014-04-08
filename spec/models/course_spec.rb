@@ -36,9 +36,9 @@ describe Course do
 
   context 'students' do
     before(:each) do puts "Total Users:#{User.count}"
-    @course = create(:course) end
+    @course = build(:course) end
     it "is one student" do
-      user = create(:user)
+      user = build(:user)
       user.courses << @course
       expect(@course.learners.length).to eq(1)
     end
