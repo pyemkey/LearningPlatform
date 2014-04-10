@@ -25,6 +25,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   GENDER_TYPE = %w(male female)
 
 
@@ -35,59 +38,34 @@ class User < ActiveRecord::Base
   belongs_to :city
   belongs_to :state
   belongs_to :country
-  accepts_nested_attributes_for :city
-  accepts_nested_attributes_for :state
-  accepts_nested_attributes_for :country
+  accepts_nested_attributes_for :city, reject_if: :check_existence_of_city
+  accepts_nested_attributes_for :state, reject_if: :check_existence_of_state
+  accepts_nested_attributes_for :country, reject_if: :check_existence_of_country
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 
   validates :city, presence: true
   validates :state, presence: true
   validates :country, presence: true
   validates :gender, inclusion: { in: GENDER_TYPE }, presence: true
+  
 
-  def autosave_associated_records_for_city
-    begin
-      new_city = City.find_by_name(self.city.name)
-      if new_city
-        self.city = new_city
-      else
-        self.city.save!
-      end
-    rescue 
-      new_city = nil
-    end
-    
+  def check_existence_of_city(attributes)
+    binding.pry
+    existing_city = find_existing(City, attributes)
+    self.city = existing_city unless existing_city.nil?
   end
 
-  def autosave_associated_records_for_state
-    begin 
-      new_state = State.find_by_name(state.name)
-      if new_state
-        self.state = new_state
-      else
-        self.state.save!
-      end
-    rescue
-      new_state = nil
-    end
+  def check_existence_of_state(attributes)
+    existing_state = find_existing(State, attributes)
+    self.state = existing_state unless existing_state.nil?
   end
 
-  def autosave_associated_records_for_country
-    begin 
-      new_country = Country.find_by_name(country.name)
-      if new_country
-        self.country = new_country
-      else
-        self.country.save!
-      end
-    rescue
-      new_country = nil
-    end
+  def check_existence_of_country(attributes)
+    existing_country = find_existing(Country, attributes)
+    self.country = existing_country unless existing_country.nil?
   end
 
-  def demographic_options_empty?
-    !(city || state || country)
+  def find_existing(obj, attributes)
+    obj.find_by(name: attributes[:name].capitalize)
   end
 end
