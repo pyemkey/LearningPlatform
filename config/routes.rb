@@ -37,7 +37,7 @@
 
 LearningPlatform::Application.routes.draw do
   root "dashboard#home"
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations'}
   resources :users
   resources :courses do
     resources :lessons
