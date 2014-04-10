@@ -1,8 +1,9 @@
 %h2
   Edit #{resource_name.to_s.humanize}
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  .form-inputs
+= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.semantic_errors
+
+  = f.inputs do
     = f.input :email, required: true, autofocus: true
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       %p
@@ -10,14 +11,16 @@
     = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
     = f.input :password_confirmation, required: false
     = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
-    = f.input :gender, collection: User::GENDER_TYPE, required: true
-    = f.simple_fields_for :city do |city_form|
-      = city_form.input :name, required: true
-    = f.simple_fields_for :state do |state_form|
-      = state_form.input :name, required: true
-    = f.association :country, collection: Country.all, required: true
-    .form-actions
-    = f.button :submit, "Update"
+    = f.input :gender, as: :select,collection: User::GENDER_TYPE, required: true
+  = f.semantic_fields_for :city do |city_form|
+    = city_form.input :name, required: true, label: "City"
+  = f.semantic_fields_for :state do |state_form|
+    = state_form.input :name, required: true, label: "State"
+  = f.semantic_fields_for :country do |country_form|
+    = country_form.input :name,  as: :select, collection: Country.all.map(&:name), required: true, label: "Country"
+  = f.actions do
+    = f.action :submit, :as => :button, button_html: { class: "primary" }, label: "Update"
+
 %h3 Cancel my account
 %p
   Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}

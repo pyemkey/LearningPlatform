@@ -7,6 +7,13 @@
     = f.input :email, required: true, autofocus: true
     = f.input :password, required: true
     = f.input :password_confirmation, required: true
+    = f.input :gender, as: :select,collection: User::GENDER_TYPE, required: true
+  = f.semantic_fields_for :city do |city_form|
+    = city_form.input :name, required: true, label: "City"
+  = f.semantic_fields_for :state do |state_form|
+    = state_form.input :name, required: true, label: "State"
+  = f.semantic_fields_for :country do |country_form|
+    = country_form.input :name,  as: :select, collection: Country.all.map(&:name), required: true, label: "Country"
   = f.actions do
     = f.action :submit, :as => :button, button_html: { class: "primary" }
 = render "devise/shared/links" 
