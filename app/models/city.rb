@@ -11,11 +11,9 @@
 #
 
 class City < ActiveRecord::Base
-  has_many :users
+  has_many :users, inverse_of: :city
   belongs_to :state
   belongs_to :country
-
-  validates :name, presence: true, uniqueness: true
 
   def name=(new_name)
     self[:name] = new_name.try(:capitalize)
