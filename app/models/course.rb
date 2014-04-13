@@ -17,7 +17,7 @@ class Course < ActiveRecord::Base
   has_many :course_learners
   has_many :learners, through: :course_learners
 
-  validates :title, presence: true
-  validates :description, presence: true
+  validates :title, presence: true, length: { in: 5..15}
+  validates :description, presence: true, length: { in: 20..180 }
   validates :author, presence: true
 end
