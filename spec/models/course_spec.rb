@@ -17,11 +17,44 @@ describe Course do
   before(:each) { @course = create(:course)}
   context "presence" do
     it "does not allow save course without title" do
-      expect(build(:course, title: nil)).to have(1).errors_on(:title)
+      expect(build(:course, title: nil).errors_on(:title)).to include("can't be blank")
     end
 
     it "does not allow save course without description" do 
-      expect(build(:course, description: nil)).to have(1).errors_on(:description)
+      expect(build(:course, description: nil).errors_on(:description)).to include("can't be blank")
+    end
+  end
+
+  describe "title" do
+    it "has right length" do
+      expect(build(:course, title: "a"*5)).to be_valid
+    end
+
+    context "length out of range" do
+      it "too short" do
+        expect(build(:course, title: "a").errors_on(:title)).to include("is too short (minimum is 5 characters)")
+      end
+
+      it "too long" do
+        expect(build(:course, title: "a"*16).errors_on(:title)).to include("is too long (maximum is 15 characters)")
+      end
+    end   
+  end
+
+  describe "description" do
+
+    it "has right length" do
+      expect(build(:course, description: "a"*20)).to be_valid
+    end
+
+    context "length out of range" do
+      it "too short" do
+        expect(build(:course, description: "a"*19).errors_on(:description)).to include("is too short (minimum is 20 characters)")
+      end
+
+      it "too long" do
+        expect(build(:course, description: "a"*181).errors_on(:description)).to include("is too long (maximum is 180 characters)")
+      end
     end
   end
 
