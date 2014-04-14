@@ -20,7 +20,7 @@ gem "font-awesome-rails"
 gem 'masonry-rails'
 gem "paperclip-dropbox"
 gem 'rails_12factor'
-
+gem 'faker'
 gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 group :doc do
   gem 'sdoc', require: false
@@ -35,7 +35,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'faker'
   gem 'capybara', '~> 2.1.0'
   gem 'database_cleaner', '~> 1.0.1'
   gem 'launchy', '~> 2.3.0'
