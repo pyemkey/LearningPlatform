@@ -10,7 +10,6 @@ class CoursesController < ApplicationController
   def enroll
     course = Course.find(params[:id]) 
     course.add_student(current_user)
-    binding.pry
     redirect_to course
   end
 

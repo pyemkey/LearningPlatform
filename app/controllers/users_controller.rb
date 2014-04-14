@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    binding.pry
     if @user.update_attributes(secure_params)
       redirect_to root_path
     else

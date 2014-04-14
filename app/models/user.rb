@@ -50,7 +50,6 @@ class User < ActiveRecord::Base
   
 
   def check_existence_of_city(attributes)
-    binding.pry
     existing_city = find_existing(City, attributes)
     self.city = existing_city unless existing_city.nil?
   end
