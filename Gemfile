@@ -19,7 +19,6 @@ gem 'bcrypt'
 gem "font-awesome-rails"
 gem 'masonry-rails'
 gem "paperclip-dropbox"
-gem 'rails_12factor'
 gem 'faker'
 gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 group :doc do
@@ -40,3 +39,8 @@ group :test do
   gem 'launchy', '~> 2.3.0'
   gem 'selenium-webdriver', '~> 2.35.1'
 end
+
+group :production do
+  gem 'rails_12factor' 
+end
+
