@@ -42,5 +42,6 @@ LearningPlatform::Application.routes.draw do
   resources :courses do
     resources :lessons
   end
+  match "courses/:id", to: "courses#enroll", via: [:post]
   
 end
