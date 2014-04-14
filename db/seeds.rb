@@ -16,7 +16,7 @@ open("http://openconcept.ca/sites/openconcept.ca/files/country_code_drupal_0.txt
     end
 end
 
-admin = User.create(email: "michal#example.com", password: "test1234", name: Faker::Name.name, city: City.find_or_create_by_name("Warszawa"), state: State.find_or_create_by_name("Mazowieckie"), country: Country.find_by_name("Poland"), gender: "male")
+admin = User.create(email: "michal@example.com", password: "test1234", name: Faker::Name.name, city: City.find_or_create_by_name("Warszawa"), state: State.find_or_create_by_name("Mazowieckie"), country: Country.find_by_name("Poland"), gender: "male")
 gender = ["female", "male"]
 
 5.times do 
@@ -33,15 +33,15 @@ gender = ["female", "male"]
                 description: Faker::Company.catch_phrase,
                 author: user)
     
-  end
+end
 
-rand(1..4).times do
+4.times do
   course = Course.find(rand(1..4))
 
   rand(1..10).times do
     lesson = Lesson.create(
               title: Faker::Company.catch_phrase,
-              body: Faker::Lorem.paragraphs(rand(2..8)).join('\n'))
+              body: Faker::Lorem.paragraphs(rand(2..8)).join(' '))
     course.lessons << lesson
   end
 
