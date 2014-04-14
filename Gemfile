@@ -19,6 +19,7 @@ gem 'bcrypt'
 gem "font-awesome-rails"
 gem 'masonry-rails'
 gem "paperclip-dropbox"
+gem 'rails_12factor'
 
 gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 group :doc do
