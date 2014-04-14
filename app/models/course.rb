@@ -17,7 +17,16 @@ class Course < ActiveRecord::Base
   has_many :course_learners
   has_many :learners, through: :course_learners
 
-  validates :title, presence: true, length: { in: 5..15}
+  validates :title, presence: true, length: { in: 5..30}
   validates :description, presence: true, length: { in: 20..180 }
   validates :author, presence: true
+
+
+  def isEnrolled?(user)
+    learners.include? user
+  end
+
+  def add_student(user)
+    self.learners << user
+  end
 end
