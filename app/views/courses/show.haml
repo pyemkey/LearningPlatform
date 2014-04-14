@@ -1,0 +1,12 @@
+%h1= @course.title
+%p= @course.description
+=button_to "Enroll now", @course, data: {title: @course.title} unless @course.isEnrolled?(current_user)
+
+%table.table.table-hover
+  %thead 
+    %tr
+      %th Lesson 
+      %th Status
+      %th Action
+  %tbody 
+    = render partial: "lessons/lesson", collection: @course.lessons

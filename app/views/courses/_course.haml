@@ -1,0 +1,10 @@
+%tr 
+  %td= course.title
+  %td= course.author.name
+  %td= course.lessons.count
+  %td= ""
+  %td 
+    - if course.isEnrolled?(current_user)
+      = link_to "Resume", course, class: "btn btn-default"
+    - else 
+      = link_to "Read description", course , class: "btn btn-default"
