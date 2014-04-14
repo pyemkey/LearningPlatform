@@ -36,7 +36,7 @@ describe Course do
       end
 
       it "too long" do
-        expect(build(:course, title: "a"*16).errors_on(:title)).to include("is too long (maximum is 15 characters)")
+        expect(build(:course, title: "a"*31).errors_on(:title)).to include("is too long (maximum is 15 characters)")
       end
     end   
   end
@@ -67,9 +67,7 @@ describe Course do
     end
   end
 
-  context 'students' do
-    before(:each) do puts "Total Users:#{User.count}"
-    @course = create(:course) end
+  context 'have students' do 
     it "is one student" do
       user = create(:user)
       user.courses << @course
@@ -82,9 +80,17 @@ describe Course do
       end
       expect(@course.learners.length).to eq(2)
     end
-
     it "none" do
-      expect(@course.learners.length).to eq(0)
+     expect(@course.learners.length).to eq(0) 
+   end
+  end
+
+  context "enrolled by" do
+    before(:each) { @user = create(:user)}
+    it "student" do
+      @course.learners << @user
+      expect(@course.isEnrolled?(@user)).to be_true
     end
+    it "nobody"
   end
 end
