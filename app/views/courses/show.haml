@@ -3,6 +3,9 @@
 =button_to "Enroll now", @course, data: {title: @course.title} unless @course.isEnrolled?(current_user)
 
 -if @course.isEnrolled?(current_user)
+  .progress
+    .progress-bar.progress-bar-success{role: "progressbar", "aria-valuemin" => "0", "aria-valuemax" => "100", "aria-valuenow" => "50", style: "width: #{current_user.check_progress(@course)}"}
+      %span= "#{current_user.check_progress(@course)}"
   %table.table.table-hover
     %thead 
       %tr
