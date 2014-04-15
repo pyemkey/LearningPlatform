@@ -26,31 +26,43 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @michal = create(:user)               
+    @user = create(:user)               
   end
 
   describe "have courses" do
     context 'is an author' do
       it "of one course" do
-        @michal.authored_courses << create(:course)
-        expect(@michal.authored_courses.count).to eq(1)
+        @user.authored_courses << create(:course)
+        expect(@user.authored_courses.count).to eq(1)
       end
 
       it "of two courses" do
-        2.times { @michal.authored_courses << create(:course) }
+        2.times { @user.authored_courses << create(:course) }
         
-        expect(@michal.authored_courses.count).to eq(2)
+        expect(@user.authored_courses.count).to eq(2)
       end 
     end
 
     context 'is a participant' do
       it "of one course" do
-        @michal.courses << create(:course)
-        expect( @michal.courses.count).to eq(1)
+        @user.courses << create(:course)
+        expect( @user.courses.count).to eq(1)
       end
       it "of two courses" do 
-        2.times { @michal.courses << create(:course) }
-        expect( @michal.courses.count).to eq(2)
+        2.times { @user.courses << create(:course) }
+        expect( @user.courses.count).to eq(2)
+      end
+    end
+
+    context 'course progress' do
+      it "is 50%" do
+        course = create(:course)
+        2.times do
+          course.lessons << create(:lesson)
+        end
+        @user.courses << course
+        @user.lessons << course.lessons.first
+        expect(@user.check_progress(course)).to eq("50%")
       end
     end
   end
