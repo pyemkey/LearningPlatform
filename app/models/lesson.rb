@@ -13,4 +13,16 @@
 class Lesson < ActiveRecord::Base
   belongs_to :course
   has_and_belongs_to_many :users
+
+  def mark_as_completed(user)
+    self.users << user
+  end
+
+  def mark_as_uncompleted(user)
+    self.users.destroy(user)
+  end
+
+  def isCompleted?(user)
+    self.users.include? user
+  end
 end
