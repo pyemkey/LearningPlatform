@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   belongs_to :city
   belongs_to :state
   belongs_to :country
-  
+
   accepts_nested_attributes_for :city, reject_if: :check_existence_of_city
   accepts_nested_attributes_for :state, reject_if: :check_existence_of_state
   accepts_nested_attributes_for :country, reject_if: :check_existence_of_country
@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
   validates :state, presence: true
   validates :country, presence: true
   validates :gender, inclusion: { in: GENDER_TYPE }, presence: true
+  
+  def check_progress(course)
+    "#{((self.lessons.where(course: course).count * 100)/course.lessons.count.to_f).round}%"
+  end
   
 private
 
