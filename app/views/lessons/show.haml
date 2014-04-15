@@ -1,4 +1,6 @@
 %h2= @lesson.title
 %p= @lesson.body
 
+
+= button_to "#{@lesson.label(current_user)}", [@lesson.course, @lesson] 
 =link_to "Back to course", @lesson.course
