@@ -31,13 +31,14 @@ class User < ActiveRecord::Base
   GENDER_TYPE = %w(male female)
 
 
+  has_and_belongs_to_many :lessons
   has_many :course_learners, foreign_key: "learner_id"
   has_many :authored_courses, foreign_key: "author_id", class_name: "Course"
   has_many :courses, through: :course_learners
-
   belongs_to :city
   belongs_to :state
   belongs_to :country
+  
   accepts_nested_attributes_for :city, reject_if: :check_existence_of_city
   accepts_nested_attributes_for :state, reject_if: :check_existence_of_state
   accepts_nested_attributes_for :country, reject_if: :check_existence_of_country
@@ -48,6 +49,7 @@ class User < ActiveRecord::Base
   validates :country, presence: true
   validates :gender, inclusion: { in: GENDER_TYPE }, presence: true
   
+private
 
   def check_existence_of_city(attributes)
     existing_city = find_existing(City, attributes)
