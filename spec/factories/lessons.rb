@@ -9,13 +9,13 @@
 #  created_at :datetime
 #  updated_at :datetime
 #
-
+require 'faker'
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
   factory :lesson do
-    course nil
-    title "MyString"
-    body "MyText"
+    association :course
+    title {Faker::Lorem.characters(5)}
+    body {Faker::Lorem.sentence}
   end
 end
