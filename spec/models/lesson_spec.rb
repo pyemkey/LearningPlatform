@@ -13,5 +13,19 @@
 require 'spec_helper'
 
 describe Lesson do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) { @lesson = create(:lesson) }
+  context 'status' do
+    it "complete" do
+      user = create(:user)
+      @lesson.mark_as_completed(user)
+      expect(@lesson.users.length).to eq(1)
+    end
+
+    it "uncomplete" do
+      user = create(:user)
+      @lesson.mark_as_completed(user)
+      @lesson.mark_as_uncompleted(user)
+      expect(@lesson.users.length).to eq(0)   
+    end
+  end
 end
