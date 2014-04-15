@@ -25,4 +25,8 @@ class Lesson < ActiveRecord::Base
   def isCompleted?(user)
     self.users.include? user
   end
+
+  def label(user)
+    "Mark as #{self.isCompleted?(user) ? 'uncompleted' : 'completed'}"
+  end
 end
