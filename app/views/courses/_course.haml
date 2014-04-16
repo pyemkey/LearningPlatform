@@ -5,6 +5,6 @@
   %td= ""
   %td 
     - if course.isEnrolled?(current_user)
-      = link_to "Resume", course, class: "btn btn-default"
+      = link_to "Resume", course, class: "btn btn-success btn-xs"
     - else 
-      = link_to "Read description", course , class: "btn btn-default"
+      = link_to "Check", course , class: "btn btn-primary btn-xs"
