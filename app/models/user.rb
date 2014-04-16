@@ -31,7 +31,8 @@ class User < ActiveRecord::Base
   GENDER_TYPE = %w(male female)
 
 
-  has_and_belongs_to_many :lessons
+  has_many :lesson_completions
+  has_many :lessons, through: :lesson_completions
   has_many :course_learners, foreign_key: "learner_id"
   has_many :authored_courses, foreign_key: "author_id", class_name: "Course"
   has_many :courses, through: :course_learners
@@ -50,9 +51,14 @@ class User < ActiveRecord::Base
   validates :gender, inclusion: { in: GENDER_TYPE }, presence: true
   
   def check_progress(course)
-    "#{((self.lessons.where(course: course).count * 100)/course.lessons.count.to_f).round}%"
+     begin
+       "#{(( self.lesson_completions.where(lesson_id: course.lessons.ids, finished_at: true) .count * 100)/course.lessons.count.to_f).round}%"
+     rescue 
+       "0%"
+     end
+    
   end
-  
+
 private
 
   def check_existence_of_city(attributes)
