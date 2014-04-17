@@ -1,10 +1,10 @@
 %h1= @course.title
 %p= @course.description
-=button_to "Enroll now", @course, data: {title: @course.title} unless @course.isEnrolled?(current_user)
+=button_to "Enroll now", @course, data: {title: @course.title} unless @course.enrolled?(current_user)
 
--if @course.isEnrolled?(current_user)
+-if @course.enrolled?(current_user)
   .progress
-    .progress-bar.progress-bar-success{role: "progressbar", "aria-valuemin" => "0", "aria-valuemax" => "100", "aria-valuenow" => "50", style: "width: #{current_user.check_progress(@course)}"}
+    .progress-bar.progress-bar-success{role: "progressbar", "aria-valuemin" => "0", "aria-valuemax" => "100", "aria-valuenow" => "50", style: "width: #{@course.check_progress(current_user)}"}
       %span= "#{current_user.check_progress(@course)}"
   %table.table.table-hover
     %thead 
@@ -13,6 +13,6 @@
         %th Status
         %th Action
     %tbody 
-      = render partial: "lessons/lesson", collection: @course.lessons
+      = render @course.lessons
 
 =link_to "Back to list of courses", courses_path

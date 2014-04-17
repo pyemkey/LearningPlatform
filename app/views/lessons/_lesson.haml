@@ -1,5 +1,8 @@
-%tr{class: "#{lesson.isCompleted?(current_user) ? "success" : "none"}"}
+%tr{class: "#{lesson.completed?(current_user) ? "success" : "none"}"}
   %td= lesson.title
   %td= lesson.status(current_user)
   %td
-    = lesson.started?(current_user) ? link_to("Resume", [lesson.course, lesson], class: "btn btn-xs btn-primary") : button_to("Start", [lesson.course, lesson], class: "btn btn-xs btn-success")
+    - if lesson.started?(current_user) 
+      =link_to("Resume", [lesson.course, lesson], class: "btn btn-xs btn-primary") 
+    -else
+      =button_to("Start", [lesson.course, lesson], class: "btn btn-xs btn-success")

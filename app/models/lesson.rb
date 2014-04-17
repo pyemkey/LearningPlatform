@@ -16,12 +16,12 @@ class Lesson < ActiveRecord::Base
   has_many :users, through: :lesson_completions
 
   def mark_as_completed(user)
-    self.lesson_completions.create(user: user, finished_at: true)
+    self.lesson_completions.where(user: user).first.update(finished_at: true)
     # binding.pry
   end
 
   def mark_as_uncompleted(user)
-    # binding.pry
+    #binding.pry
     self.lesson_completions.where(user: user).first.update(finished_at: nil)
   end
 
@@ -29,8 +29,8 @@ class Lesson < ActiveRecord::Base
     self.users << user
   end
 
-  def isCompleted?(user, finished_at=true)
-    !self.lesson_completions.where(user: user, finished_at: finished_at).empty?
+  def completed?(user, status=true)
+    !self.lesson_completions.where(user: user, finished_at: status).empty?
   end
 
   def started?(user)
@@ -38,18 +38,27 @@ class Lesson < ActiveRecord::Base
   end
 
   def label(user)
-    "Mark as #{self.isCompleted?(user) ? 'uncompleted' : 'completed'}"
+    "Mark as #{self.completed?(user) ? 'uncompleted' : 'completed'}"
   end
 
   def status(user)
-    if self.isCompleted?(user)
+    if self.completed?(user)
       "Finised"
-    elsif self.isCompleted?(user, nil)
+    elsif self.completed?(user, nil)
       "In progress"
     else
       "Not started"
     end
   end
 
+  def marked(student)
+    if !self.started?(student)
+      self.mark_as_started(student)
+    elsif self.completed?(student)
+      self.mark_as_uncompleted(student)
+    else
+      self.mark_as_completed(student)
+    end
+  end
   
 end

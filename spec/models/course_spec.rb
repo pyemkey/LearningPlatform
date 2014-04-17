@@ -89,7 +89,7 @@ describe Course do
     before(:each) { @user = create(:user)}
     it "student" do
       @course.learners << @user
-      expect(@course.isEnrolled?(@user)).to be_true
+      expect(@course.enrolled?(@user)).to be_true
     end
     it "nobody"
   end

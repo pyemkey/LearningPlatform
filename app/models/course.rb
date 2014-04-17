@@ -22,11 +22,19 @@ class Course < ActiveRecord::Base
   validates :author, presence: true
 
 
-  def isEnrolled?(user)
+  def enrolled?(user)
     learners.include? user
   end
 
   def add_student(user)
     self.learners << user
+  end
+
+  def check_progress(user)
+    begin
+       "#{(( user.lesson_completions.where(lesson_id: self.lessons.ids, finished_at: true).count * 100)/self.lessons.count.to_f).round}%"
+     rescue 
+       "0%"
+     end
   end
 end
