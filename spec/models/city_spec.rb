@@ -24,7 +24,7 @@ describe City do
       it 'create new city' do
         mediolan = build(:city, name: "Mediolan")
         expect(mediolan).to be_valid
-      end    
+      end
     end
 
     context 'is empty' do
@@ -44,6 +44,6 @@ describe City do
         new_london = build(:city, name: "London")
         expect(new_london).to have(1).errors_on(:name)
       end
-    end 
+    end
   end
 end

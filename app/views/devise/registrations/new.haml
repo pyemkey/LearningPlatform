@@ -1,6 +1,6 @@
 %h2 Sign up
 
-= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| 
+= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = f.semantic_errors
 
   = f.inputs do
@@ -16,4 +16,4 @@
     = country_form.input :name,  as: :select, collection: Country.all.map(&:name), required: true, label: "Country"
   = f.actions do
     = f.action :submit, :as => :button, button_html: { class: "primary" }
-= render "devise/shared/links" 
+= render "devise/shared/links"

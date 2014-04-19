@@ -26,7 +26,7 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = create(:user)               
+    @user = create(:user)
   end
 
   describe "have courses" do
@@ -38,9 +38,9 @@ describe User do
 
       it "of two courses" do
         2.times { @user.authored_courses << create(:course) }
-        
+
         expect(@user.authored_courses.count).to eq(2)
-      end 
+      end
     end
 
     context 'is a participant' do
@@ -48,7 +48,7 @@ describe User do
         @user.courses << create(:course)
         expect( @user.courses.count).to eq(1)
       end
-      it "of two courses" do 
+      it "of two courses" do
         2.times { @user.courses << create(:course) }
         expect( @user.courses.count).to eq(2)
       end

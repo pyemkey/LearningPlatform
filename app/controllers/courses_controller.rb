@@ -8,7 +8,7 @@ class CoursesController < ApplicationController
   end
 
   def enroll
-    course = Course.find(params[:id]) 
+    course = Course.find(params[:id])
     course.add_student(current_user)
     redirect_to course
   end

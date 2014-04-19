@@ -33,7 +33,7 @@ class Course < ActiveRecord::Base
   def check_progress(user)
     begin
        "#{(( user.lesson_completions.where(lesson_id: self.lessons.ids, finished_at: true).count * 100)/self.lessons.count.to_f).round}%"
-     rescue 
+     rescue
        "0%"
      end
   end

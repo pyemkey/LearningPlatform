@@ -5,14 +5,14 @@
 -if @course.enrolled?(current_user)
   .progress
     .progress-bar.progress-bar-success{role: "progressbar", "aria-valuemin" => "0", "aria-valuemax" => "100", "aria-valuenow" => "50", style: "width: #{@course.check_progress(current_user)}"}
-      %span= "#{current_user.check_progress(@course)}"
+      %span= "#{@course.check_progress(current_user)}"
   %table.table.table-hover
-    %thead 
+    %thead
       %tr
-        %th Lesson 
+        %th Lesson
         %th Status
         %th Action
-    %tbody 
+    %tbody
       = render @course.lessons
 
 =link_to "Back to list of courses", courses_path

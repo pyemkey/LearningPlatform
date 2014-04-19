@@ -8,7 +8,7 @@ class LessonsController < ApplicationController
 
   def completed
     @lesson = get_lesson
-    @lesson.marked(current_user) 
+    @lesson.marked(current_user)
     redirect_to [@lesson.course, @lesson]
   end
 

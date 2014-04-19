@@ -60,5 +60,5 @@ class Lesson < ActiveRecord::Base
       self.mark_as_completed(student)
     end
   end
-  
+
 end

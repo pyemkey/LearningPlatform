@@ -20,7 +20,7 @@ describe Course do
       expect(build(:course, title: nil).errors_on(:title)).to include("can't be blank")
     end
 
-    it "does not allow save course without description" do 
+    it "does not allow save course without description" do
       expect(build(:course, description: nil).errors_on(:description)).to include("can't be blank")
     end
   end
@@ -38,7 +38,7 @@ describe Course do
       it "too long" do
         expect(build(:course, title: "a"*31).errors_on(:title)).to include("is too long (maximum is 15 characters)")
       end
-    end   
+    end
   end
 
   describe "description" do
@@ -59,7 +59,7 @@ describe Course do
   end
 
   context 'have one author' do
-    it "is invalid without author" do 
+    it "is invalid without author" do
       expect(build(:course, author_id: nil)).to have(1).errors_on(:author)
     end
     it "is valid with author" do
@@ -67,21 +67,21 @@ describe Course do
     end
   end
 
-  context 'have students' do 
+  context 'have students' do
     it "is one student" do
       user = create(:user)
       user.courses << @course
       expect(@course.learners.length).to eq(1)
     end
     it "is two students" do
-      2.times do 
+      2.times do
         user = create(:user)
         @course.learners << user
       end
       expect(@course.learners.length).to eq(2)
     end
     it "none" do
-     expect(@course.learners.length).to eq(0) 
+     expect(@course.learners.length).to eq(0)
    end
   end
 

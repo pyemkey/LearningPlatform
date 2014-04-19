@@ -29,7 +29,7 @@ describe Lesson do
     it "uncomplete" do
       @lesson.mark_as_completed(@user)
       @lesson.mark_as_uncompleted(@user)
-      expect(@lesson.users.length).to eq(0)   
+      expect(@lesson.users.length).to eq(0)
     end
   end
 end
