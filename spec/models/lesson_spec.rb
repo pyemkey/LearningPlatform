@@ -13,13 +13,17 @@
 require 'spec_helper'
 
 describe Lesson do
+
   before(:each) { @lesson = create(:lesson) }
+
   context 'status' do
     before(:each) { @user = create(:user) }
+
     it "in progress" do
       @lesson.mark_as_started(@user)
       expect(@lesson.users.length).to eq(1)
     end
+
     it "complete" do
       @lesson.mark_as_completed(@user)
       finished_lesson = @lesson.lesson_completions.where(user: @user, finished_at: true)
