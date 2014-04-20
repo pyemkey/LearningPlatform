@@ -20,7 +20,7 @@ gem "font-awesome-rails"
 gem 'masonry-rails'
 gem "paperclip-dropbox"
 gem 'faker'
-gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+gem 'annotate'
 group :doc do
   gem 'sdoc', require: false
 end
@@ -32,6 +32,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'hirb'
   gem "bullet"
+  gem 'shoulda-matchers'
 end
 
 group :test do
